@@ -1,0 +1,15 @@
+{
+	"name": "adf-easy-shop",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8f818500-2c00-45d2-b770-142050828893",
+		"tenantId": "d1b99a31-59dc-4039-b9c4-f6166b6bf0a4"
+	}
+}
