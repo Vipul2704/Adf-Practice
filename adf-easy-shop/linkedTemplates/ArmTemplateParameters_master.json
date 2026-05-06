@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-easy-shop"
+		},
+		"ls_blob_storage_connectionString": {
+			"value": ""
+		},
+		"ls_sqldatabase_password": {
+			"value": ""
+		},
+		"ls_sqldatabase_properties_typeProperties_server": {
+			"value": "sql-easy-shop.database.windows.net"
+		},
+		"ls_sqldatabase_properties_typeProperties_database": {
+			"value": "dbshopeasy"
+		},
+		"ls_sqldatabase_properties_typeProperties_userName": {
+			"value": "sqladmin"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
