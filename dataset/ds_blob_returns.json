@@ -1,0 +1,60 @@
+{
+	"name": "ds_blob_returns",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BLOB Datasets"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "returns.csv",
+				"folderPath": "returns",
+				"container": "rawdata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ReturnId",
+				"type": "String"
+			},
+			{
+				"name": "OrderId",
+				"type": "String"
+			},
+			{
+				"name": "CustomerId",
+				"type": "String"
+			},
+			{
+				"name": "ProductId",
+				"type": "String"
+			},
+			{
+				"name": "ReturnDate",
+				"type": "String"
+			},
+			{
+				"name": "ReturnReason",
+				"type": "String"
+			},
+			{
+				"name": "ReturnStatus",
+				"type": "String"
+			},
+			{
+				"name": "RefundAmount",
+				"type": "String"
+			}
+		]
+	}
+}
