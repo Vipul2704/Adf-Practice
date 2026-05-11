@@ -1650,6 +1650,141 @@
 				"[concat(variables('factoryId'), '/datasets/ds_blob_returns')]",
 				"[concat(variables('factoryId'), '/datasets/ds_sql_factReturns')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline_master')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "LoadDimension",
+						"description": "This pipeline is for to load the dimension",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pipeline_CopyDimension",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "LoadCleansOrder",
+						"description": "this pipeline is for to load the orders fact table",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "LoadDimension",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pipeline_LoadOrders",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "LoadtheEnrichData",
+						"description": "to insert the pending blank data into sql",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "LoadCleansOrder",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.00:30:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "df_EnrichOrders",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"factOrders": {},
+									"Customers": {},
+									"Product": {},
+									"LoadEnrichOrder": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "NotifiedOfSucess",
+						"description": "Notification of sucess",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "LoadtheEnrichData",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://webhook.site/88eaf54f-0d84-48cb-8014-73de04480ec7",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "{\"pipeline\": \"@pipeline().pipeline}\",\n\"status\":\"Sucess\",\n\"runId\":\"@{pipeline().RunId}\",\n\"completedAt\": \"@{utcnow()}\",\n\"message\":\"Shopy Easy Pipeline completed sucessfully\"\n}",
+								"type": "Expression"
+							},
+							"timeout": "00:10:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"Master": {
+						"type": "string",
+						"defaultValue": "Full"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pipeline_CopyDimension')]",
+				"[concat(variables('factoryId'), '/pipelines/pipeline_LoadOrders')]",
+				"[concat(variables('factoryId'), '/dataflows/df_EnrichOrders')]"
+			]
 		}
 	]
 }
