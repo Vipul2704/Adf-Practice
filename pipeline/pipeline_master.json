@@ -96,7 +96,7 @@
 					"url": "https://webhook.site/88eaf54f-0d84-48cb-8014-73de04480ec7",
 					"method": "POST",
 					"body": {
-						"value": "{\"pipeline\": \"@pipeline().pipeline}\",\n\"status\":\"Sucess\",\n\"runId\":\"@{pipeline().RunId}\",\n\"completedAt\": \"@{utcnow()}\",\n\"message\":\"Shopy Easy Pipeline completed sucessfully\"\n}",
+						"value": "{\"pipeline\": \"@pipeline().pipeline}\",\n\"status\":\"Sucess\",\n\"runId\":\"@{pipeline().RunId}\",\n\"completedAt\": \"@{utcNow()}\",\n\"message\":\"Shopy Easy Pipeline completed sucessfully\"\n}",
 						"type": "Expression"
 					},
 					"timeout": "00:10:00"
