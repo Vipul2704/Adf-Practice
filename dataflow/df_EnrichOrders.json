@@ -127,8 +127,8 @@
 				"          CustomerId = factOrders@CustomerId,",
 				"          ProductId = factOrders@ProductId,",
 				"          CustomerName,",
-				"          ProductName = factOrders@ProductName,",
-				"          Category = factOrders@Category,",
+				"          ProductName = Product@ProductName,",
+				"          Category = Product@Category,",
 				"          OrderDate,",
 				"          OrderMonth,",
 				"          OrderYear,",
@@ -201,7 +201,6 @@
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
-				"     truncate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
@@ -228,8 +227,7 @@
 				"          PaymentMethod,",
 				"          OrderStatus,",
 				"          IsDelivered,",
-				"          Region,",
-				"          LoadedAt",
+				"          Region",
 				"     )) ~> LoadEnrichOrder"
 			]
 		}

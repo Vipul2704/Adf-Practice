@@ -64,6 +64,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table fact_Returns",
 						"writeBehavior": "upsert",
 						"upsertSettings": {
 							"useTempDB": true,
