@@ -1762,7 +1762,7 @@
 							"method": "POST",
 							"headers": {},
 							"body": {
-								"value": "{\"pipeline\": \"@pipeline().pipeline}\",\n\"status\":\"Sucess\",\n\"runId\":\"@{pipeline().RunId}\",\n\"completedAt\": \"@{utcnow()}\",\n\"message\":\"Shopy Easy Pipeline completed sucessfully\"\n}",
+								"value": "{\"pipeline\": \"@pipeline().pipeline}\",\n\"status\":\"Sucess\",\n\"runId\":\"@{pipeline().RunId}\",\n\"completedAt\": \"@{utcNow()}\",\n\"message\":\"Shopy Easy Pipeline completed sucessfully\"\n}",
 								"type": "Expression"
 							},
 							"timeout": "00:10:00"
