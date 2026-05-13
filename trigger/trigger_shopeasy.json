@@ -1,0 +1,17 @@
+{
+	"name": "trigger_shopeasy",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 1,
+				"startTime": "2026-05-13T11:25:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
